@@ -1,138 +1,22 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aslım 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background: linear-gradient(135deg, #ffe4e1, #fff0f5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    .heart {
-      width: 150px;
-      height: 150px;
-      background: #ff4d6d;
-      position: relative;
-      transform: rotate(-45deg);
-      cursor: pointer;
-      border-radius: 30px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
-    }
-    .heart:hover {
-      transform: scale(1.05) rotate(-45deg);
-    }
-    .heart::before,
-    .heart::after {
-      content: "";
-      width: 150px;
-      height: 150px;
-      background: #ff4d6d;
-      position: absolute;
-      border-radius: 50%;
-    }
-    .heart::before {
-      top: -75px;
-      left: 0;
-    }
-    .heart::after {
-      left: 75px;
-      top: 0;
-    }
-    #prompt, #message {
-      display: none;
-      margin-top: 40px;
-    }
-    .btn {
-      position: relative;
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 18px;
-      margin: 10px;
-      border-radius: 16px; /* UICorner etkisi */
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    .btn:active {
-      transform: scale(0.97);
-    }
-    .btn::after {
-      content: "";
-      position: absolute;
-      background: rgba(255,255,255,0.5);
-      border-radius: 50%;
-      transform: scale(0);
-      animation: ripple 0.6s linear;
-    }
-    .btn:focus:not(:active)::after {
-      animation: none;
-    }
-    @keyframes ripple {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-    .btn:active::after {
-      width: 100px;
-      height: 100px;
-      top: 50%;
-      left: 50%;
-      margin-top: -50px;
-      margin-left: -50px;
-    }
-    h1 {
-      font-size: 32px;
-      color: #d63384;
-      animation: fadeIn 1.2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Key Validation</title>
+    <script>
+        const validKeys = ["ETHRYXZ"];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const userKey = urlParams.get("key");
+
+        if (validKeys.includes(userKey)) {
+            document.write("return 12345678");
+        } else {
+            document.write("return 0");
+        }
+    </script>
 </head>
 <body>
-
-<div class="heart" onclick="showPrompt()"></div>
-
-<div id="prompt">
-  <p style="font-size: 20px; margin-bottom: 10px;">Girmek istiyor musunuz?</p>
-  <button class="btn" onclick="showMessage()">Evet</button>
-  <button class="btn" onclick="sayNo()">Hayır</button>
-</div>
-
-<div id="message">
-  <h1>ASLIM, SENİ ÇOK SEVİYORUM 💖</h1>
-</div>
-
-<script>
-  function showPrompt() {
-    document.getElementById('prompt').style.display = 'block';
-  }
-  function showMessage() {
-    document.getElementById('message').style.display = 'block';
-    document.getElementById('prompt').style.display = 'none';
-  }
-  function sayNo() {
-    alert(":( Olsun, ben seni yine de seviyorum.");
-  }
-</script>
-
 </body>
 </html>
